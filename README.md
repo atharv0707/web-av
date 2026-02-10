@@ -116,11 +116,3 @@ Simply edit the HTML content in each `.html` file. The styling will automaticall
 - No cookies or local storage - fully stateless design
 - All animations are performant and GPU-accelerated
 
-## 💝 Made with Love
-
-This website is a creative expression of love and appreciation. Feel free to customize it for your own special someone!
-
----
-
-**Created:** Valentine's Day 2026
-**Built by:** A Software Engineer in Love ❤️

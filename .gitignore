@@ -1,0 +1,27 @@
+# Git ignore for Valentine's Day Website
+
+# OS
+.DS_Store
+Thumbs.db
+.swp
+.swo
+
+# Editor configs
+.vscode/extensions.json
+.idea/
+
+# Build artifacts
+dist/
+build/
+
+# Node modules (if using Node.js in future)
+node_modules/
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.sublime-*

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quiz - Unlock Your Gift">
+  <title>Your Gift - Quiz | My Love</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html" class="nav-brand">My Aanya</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="story.html">Our Story</a></li>
+      <li><a href="valentine.html">Valentine's Day</a></li>
+      <li><a href="quiz.html" class="active">Your Gift</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="page" id="quiz-page">
+    <div class="container">
+      <div class="page-content" style="max-width: 700px;">
+        <h1>Your Gift Awaits</h1>
+
+        <div class="quiz-description">
+          Answer these questions to unlock your gift
+        </div>
+
+        <div class="quiz-container">
+          <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="quiz-question">
+              <h3>When did we first confess to each other?</h3>
+              <div class="quiz-options">
+                <div class="quiz-option">
+                  <input type="radio" name="question1" value="A" id="q1a" required>
+                  <label for="q1a">29th August 2025</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question1" value="B" id="q1b">
+                  <label for="q1b">29th August 2026</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question1" value="C" id="q1c">
+                  <label for="q1c">1st September 2025</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question1" value="D" id="q1d">
+                  <label for="q1d">28th September 2026</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-question">
+              <h3>When did we first meet in real life?</h3>
+              <div class="quiz-options">
+                <div class="quiz-option">
+                  <input type="radio" name="question2" value="A" id="q2a" required>
+                  <label for="q2a">1st October 2025</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question2" value="B" id="q2b">
+                  <label for="q2b">1st November 2025</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question2" value="C" id="q2c">
+                  <label for="q2c">1st November 2026</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question2" value="D" id="q2d">
+                  <label for="q2d">2nd October 2025</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-question">
+              <h3>When did we decide to tell each other's parents?</h3>
+              <div class="quiz-options">
+                <div class="quiz-option">
+                  <input type="radio" name="question3" value="A" id="q3a" required>
+                  <label for="q3a">30th November 2026</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question3" value="B" id="q3b">
+                  <label for="q3b">15th December 2025</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question3" value="C" id="q3c">
+                  <label for="q3c">7th December 2026</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" name="question3" value="D" id="q3d">
+                  <label for="q3d">7th December 2025</label>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" id="quiz-submit" class="btn quiz-submit">
+              Submit Answers
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Button -->
+        <div style="display: flex; gap: 1rem; margin-top: 2rem; justify-content: center; flex-wrap: wrap;">
+          <a href="valentine.html" class="btn btn-secondary">← Back</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Put your knowledge to the test | Unlock the gift</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -64,6 +64,7 @@ h1 {
   margin-bottom: var(--spacing-lg);
   font-weight: 400;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 h2 {
@@ -226,9 +227,10 @@ nav {
    ============================================ */
 
 .container {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: var(--spacing-md);
+  width: 100%;
 }
 
 .page {
@@ -242,11 +244,12 @@ nav {
 
 .page-content {
   width: 100%;
-  max-width: 1200px;
+  max-width: 85%;
   padding: var(--spacing-lg) var(--spacing-lg);
   background-color: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: 0;
+  margin: 0 auto;
 }
 
 /* ============================================
@@ -487,10 +490,11 @@ nav {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
   max-width: 100%;
+  width: 100%;
 }
 
 .slideshow-section {
@@ -531,7 +535,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -854,7 +858,7 @@ footer a {
   }
 
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
   }
 
@@ -937,12 +941,17 @@ footer a {
 
   .page {
     min-height: auto;
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .page-content {
     padding: var(--spacing-md);
-    margin: var(--spacing-md);
+    margin: 0 auto;
+    max-width: 90%;
+    border: 1px solid var(--border);
   }
 
   .home-buttons {
@@ -959,10 +968,14 @@ footer a {
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
   }
 
   .slideshow-section {
-    padding: var(--spacing-sm);
+    padding: 0.4rem;
   }
 
   .story-section {
@@ -1002,17 +1015,21 @@ footer a {
   }
 
   .page-content {
-    border: none;
+    max-width: 92%;
+    border: 1px solid var(--border);
   }
 
   .gallery-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
   }
 
   .slideshow-section {
-    padding: var(--spacing-sm);
+    padding: 0.4rem;
     margin-bottom: 0;
   }
 

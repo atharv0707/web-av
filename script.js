@@ -231,3 +231,251 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ============================================
+// SLIDESHOW FUNCTIONALITY
+// ============================================
+
+// Slideshow data structure
+const slideshows = {
+  confession: {
+    images: [
+      'img/confession/conf1.jpeg',
+      'img/confession/conf2.jpeg',
+      'img/confession/conf3.jpeg',
+      'img/confession/conf4.jpeg',
+      'img/confession/conf5.jpeg',
+      'img/confession/conf6.jpeg'
+    ],
+    currentIndex: 0,
+    autoRotate: true,
+    autoRotateInterval: null
+  },
+  cute: {
+    images: [
+      'img/cute-photos/IMG_2846.JPG',
+      'img/cute-photos/IMG_2848.JPG',
+      'img/cute-photos/IMG_2957.JPG'
+    ],
+    currentIndex: 0,
+    autoRotate: true,
+    autoRotateInterval: null
+  },
+  mugs: {
+    images: [
+      'img/random-mugs/IMG_1728.JPG',
+      'img/random-mugs/IMG_2853.JPG',
+      'img/random-mugs/IMG_2962.JPG',
+      'img/random-mugs/lp_image.jpg'
+    ],
+    currentIndex: 0,
+    autoRotate: true,
+    autoRotateInterval: null,
+    locked: true
+  }
+};
+
+const CORRECT_PIN = '29082025';
+
+// Change slide function
+function changeSlide(slideshowId, direction) {
+  const slideshow = slideshows[slideshowId];
+  if (!slideshow) return;
+
+  slideshow.currentIndex += direction;
+  
+  // Wrap around
+  if (slideshow.currentIndex >= slideshow.images.length) {
+    slideshow.currentIndex = 0;
+  } else if (slideshow.currentIndex < 0) {
+    slideshow.currentIndex = slideshow.images.length - 1;
+  }
+
+  updateSlideshow(slideshowId);
+
+  // Reset auto-rotation if manual navigation
+  if (slideshow.autoRotate) {
+    clearInterval(slideshow.autoRotateInterval);
+    slideshow.autoRotateInterval = setInterval(() => {
+      changeSlide(slideshowId, 1);
+    }, 4000);
+  }
+}
+
+// Go to specific slide
+function goToSlide(slideshowId, index) {
+  const slideshow = slideshows[slideshowId];
+  if (!slideshow) return;
+
+  if (index >= 0 && index < slideshow.images.length) {
+    slideshow.currentIndex = index;
+    updateSlideshow(slideshowId);
+
+    // Reset auto-rotation if manual navigation
+    if (slideshow.autoRotate) {
+      clearInterval(slideshow.autoRotateInterval);
+      slideshow.autoRotateInterval = setInterval(() => {
+        changeSlide(slideshowId, 1);
+      }, 4000);
+    }
+  }
+}
+
+// Update slideshow display
+function updateSlideshow(slideshowId) {
+  const slideshow = slideshows[slideshowId];
+  if (!slideshow) return;
+
+  const container = document.getElementById(slideshowId + '-slideshow');
+  if (!container) return;
+
+  // Update image
+  const img = container.querySelector('.slideshow-image');
+  if (img) {
+    img.src = slideshow.images[slideshow.currentIndex];
+  }
+
+  // Update dots
+  const dots = container.querySelectorAll('.dot');
+  dots.forEach((dot, index) => {
+    dot.classList.remove('active');
+    if (index === slideshow.currentIndex) {
+      dot.classList.add('active');
+    }
+  });
+
+  // Update modal image if it's open
+  const modal = document.getElementById('image-modal');
+  if (modal && modal.classList.contains('active')) {
+    const modalImg = document.getElementById('modal-image');
+    if (modalImg) {
+      modalImg.src = slideshow.images[slideshow.currentIndex];
+    }
+  }
+}
+
+// Initialize slideshows
+function initSlideshows() {
+  // Initialize confession slideshow with auto-rotation
+  updateSlideshow('confession');
+  slideshows.confession.autoRotateInterval = setInterval(() => {
+    changeSlide('confession', 1);
+  }, 4000);
+  
+  // Initialize cute photos slideshow with auto-rotation
+  updateSlideshow('cute');
+  slideshows.cute.autoRotateInterval = setInterval(() => {
+    changeSlide('cute', 1);
+  }, 4000);
+  
+  // Initialize mugs slideshow (will start after PIN unlock)
+  updateSlideshow('mugs');
+}
+
+// PIN validation function
+function validatePin() {
+  const pinInput = document.getElementById('pin-input');
+  const messageDiv = document.getElementById('pin-message');
+  const pin = pinInput.value.trim();
+
+  if (pin === CORRECT_PIN) {
+    // Correct PIN
+    slideshows.mugs.locked = false;
+    
+    // Hide PIN lock container
+    const lockContainer = document.getElementById('pin-lock-container');
+    if (lockContainer) {
+      lockContainer.style.display = 'none';
+    }
+
+    // Show slideshow
+    const mugsSlideshow = document.getElementById('mugs-slideshow');
+    if (mugsSlideshow) {
+      mugsSlideshow.style.display = 'block';
+    }
+
+    // Start auto-rotation for mugs
+    if (slideshows.mugs.autoRotateInterval) {
+      clearInterval(slideshows.mugs.autoRotateInterval);
+    }
+    slideshows.mugs.autoRotateInterval = setInterval(() => {
+      changeSlide('mugs', 1);
+    }, 4000);
+
+    // Show success message
+    messageDiv.textContent = '✓ Unlocked!';
+    messageDiv.className = 'success';
+    
+    setTimeout(() => {
+      messageDiv.textContent = '';
+    }, 2000);
+
+    // Clear input
+    pinInput.value = '';
+  } else {
+    // Incorrect PIN
+    messageDiv.textContent = '✗ Incorrect PIN. Try again!';
+    messageDiv.className = 'error';
+    pinInput.value = '';
+    pinInput.focus();
+  }
+}
+
+// Initialize slideshows on images page
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.pathname.includes('images.html')) {
+    initSlideshows();
+  }
+});
+
+// Cleanup auto-rotation intervals when leaving the page
+window.addEventListener('beforeunload', () => {
+  if (slideshows.confession.autoRotateInterval) {
+    clearInterval(slideshows.confession.autoRotateInterval);
+  }
+  if (slideshows.cute.autoRotateInterval) {
+    clearInterval(slideshows.cute.autoRotateInterval);
+  }
+  if (slideshows.mugs.autoRotateInterval) {
+    clearInterval(slideshows.mugs.autoRotateInterval);
+  }
+});
+
+// ============================================
+// IMAGE MODAL FUNCTIONALITY
+// ============================================
+
+function openImageModal(imageSrc) {
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-image');
+  
+  if (modal && modalImg) {
+    modalImg.src = imageSrc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('image-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// Handle Escape key to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeImageModal();
+  }
+});
+
+// Close modal when clicking outside the image
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('image-modal');
+  if (modal && e.target === modal) {
+    closeImageModal();
+  }
+});
+

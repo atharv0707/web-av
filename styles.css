@@ -481,6 +481,263 @@ nav {
 }
 
 /* ============================================
+   SLIDESHOW STYLES
+   ============================================ */
+
+.slideshow-section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.slideshow-section h2 {
+  margin-top: 0;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 800px;
+  margin: var(--spacing-lg) auto;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slideshow-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: #1a1a1a;
+}
+
+.slideshow-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slideshow-label {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  background-color: rgba(212, 40, 40, 0.9);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.slideshow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+.slideshow-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.slideshow-btn.prev-btn {
+  left: var(--spacing-md);
+}
+
+.slideshow-btn.next-btn {
+  right: var(--spacing-md);
+}
+
+.slideshow-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background-color: var(--bg-primary);
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid var(--border);
+}
+
+.dot:hover {
+  background-color: #999999;
+}
+
+.dot.active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.2);
+}
+
+/* PIN Lock Styles */
+.pin-lock-container {
+  position: relative;
+  max-width: 800px;
+  margin: var(--spacing-lg) auto;
+  height: 500px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pin-lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(212, 40, 40, 0.1) 0%, rgba(22, 22, 22, 0.3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.pin-lock-content {
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.pin-lock-content p {
+  font-size: 1.3rem;
+  margin: var(--spacing-md) 0;
+  font-weight: 500;
+}
+
+.pin-lock-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.pin-input-field {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1.1rem;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  margin: var(--spacing-md) 0;
+  width: 200px;
+  max-width: 90%;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.pin-input-field:focus {
+  outline: none;
+  border-color: var(--text-primary);
+  box-shadow: 0 0 8px rgba(212, 40, 40, 0.3);
+}
+
+.pin-submit-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: var(--spacing-md);
+  transition: background-color 0.3s ease;
+}
+
+.pin-submit-btn:hover {
+  background-color: #b01b1b;
+}
+
+#pin-message {
+  margin-top: var(--spacing-md);
+  font-size: 0.9rem;
+  min-height: 20px;
+}
+
+#pin-message.error {
+  color: #c41e3a;
+}
+
+#pin-message.success {
+  color: #28a745;
+}
+
+/* Image Modal Styles */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.image-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1001;
+}
+
+.modal-close:hover {
+  color: var(--accent);
+}
+
+.modal-image {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  animation: fadeInScale 0.4s ease-out;
+}
+
+/* Make slideshow wrapper clickable */
+.slideshow-wrapper {
+  cursor: pointer;
+}
+
+.slideshow-wrapper:hover {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 
@@ -698,5 +955,17 @@ footer a {
 
   .story-quote {
     font-size: 0.9rem;
+  }
+
+  .slideshow-container {
+    max-width: 90%;
+  }
+
+  .slideshow-btn {
+    padding: 0.5rem 1rem;
+  }
+
+  .slideshow-label {
+    font-size: 1.5rem;
   }
 }

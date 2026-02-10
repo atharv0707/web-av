@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Photo Gallery - A collection of memories">
+  <title>Images Gallery | My Love</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html" class="nav-brand">My Aanya</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="story.html">Our Story</a></li>
+      <li><a href="valentine.html">Valentine's Day</a></li>
+      <li><a href="images.html" class="active">Photo Gallery</a></li>
+      <li><a href="quiz.html">Your Gift</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="page" id="images">
+    <div class="container">
+      <div class="page-content">
+        <h1>Photo Gallery</h1>
+
+        <!-- CONFESSION SLIDESHOW -->
+        <section class="slideshow-section">
+          <h2>Our Confession</h2>
+          <div class="slideshow-container" id="confession-slideshow">
+            <div class="slideshow-wrapper" onclick="openImageModal('img/confession/conf1.jpeg')">
+              <img src="img/confession/conf1.jpeg" alt="Confession photo 1" class="slideshow-image">
+            </div>
+            <button class="slideshow-btn prev-btn" onclick="changeSlide('confession', -1)">❮</button>
+            <button class="slideshow-btn next-btn" onclick="changeSlide('confession', 1)">❯</button>
+            <div class="slideshow-dots">
+              <span class="dot" onclick="goToSlide('confession', 0)"></span>
+              <span class="dot" onclick="goToSlide('confession', 1)"></span>
+              <span class="dot" onclick="goToSlide('confession', 2)"></span>
+              <span class="dot" onclick="goToSlide('confession', 3)"></span>
+              <span class="dot" onclick="goToSlide('confession', 4)"></span>
+              <span class="dot" onclick="goToSlide('confession', 5)"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- CUTE PHOTOS SLIDESHOW -->
+        <section class="slideshow-section">
+          <h2>Cute Photos</h2>
+          <div class="slideshow-container" id="cute-slideshow">
+            <div class="slideshow-wrapper" onclick="openImageModal('img/cute-photos/IMG_2846.JPG')">
+              <img src="img/cute-photos/IMG_2846.JPG" alt="Cute photo 1" class="slideshow-image">
+            </div>
+            <button class="slideshow-btn prev-btn" onclick="changeSlide('cute', -1)">❮</button>
+            <button class="slideshow-btn next-btn" onclick="changeSlide('cute', 1)">❯</button>
+            <div class="slideshow-dots">
+              <span class="dot" onclick="goToSlide('cute', 0)"></span>
+              <span class="dot" onclick="goToSlide('cute', 1)"></span>
+              <span class="dot" onclick="goToSlide('cute', 2)"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- RANDOM MUGS SLIDESHOW (PIN PROTECTED) -->
+        <section class="slideshow-section">
+          <h2>Special Collection</h2>
+          
+          <!-- PIN Lock Section -->
+          <div class="pin-lock-container" id="pin-lock-container">
+            <div class="pin-lock-overlay">
+              <div class="pin-lock-content">
+                <p>🔒 This collection is locked</p>
+                <p class="pin-lock-subtitle">Enter the secret PIN to unlock</p>
+                <input 
+                  type="password" 
+                  id="pin-input" 
+                  class="pin-input-field" 
+                  placeholder="Enter PIN"
+                  onkeypress="if(event.key==='Enter')validatePin()"
+                >
+                <button class="pin-submit-btn" onclick="validatePin()">Unlock</button>
+                <div id="pin-message"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unlocked Slideshow (Hidden by default) -->
+          <div class="slideshow-container" id="mugs-slideshow" style="display: none;">
+            <div class="slideshow-wrapper" onclick="openImageModal('img/random-mugs/IMG_1728.JPG')">
+              <img src="img/random-mugs/IMG_1728.JPG" alt="Random mug 1" class="slideshow-image">
+            </div>
+            <button class="slideshow-btn prev-btn" onclick="changeSlide('mugs', -1)">❮</button>
+            <button class="slideshow-btn next-btn" onclick="changeSlide('mugs', 1)">❯</button>
+            <div class="slideshow-dots">
+              <span class="dot" onclick="goToSlide('mugs', 0)"></span>
+              <span class="dot" onclick="goToSlide('mugs', 1)"></span>
+              <span class="dot" onclick="goToSlide('mugs', 2)"></span>
+              <span class="dot" onclick="goToSlide('mugs', 3)"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div style="display: flex; gap: 1rem; margin-top: 3rem; justify-content: center; flex-wrap: wrap;">
+          <a href="index.html" class="btn btn-secondary">← Back Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Image Modal for Expansion -->
+  <div id="image-modal" class="image-modal">
+    <span class="modal-close" onclick="closeImageModal()">&times;</span>
+    <img id="modal-image" src="" alt="Expanded image" class="modal-image">
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Memories with you | My Love</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

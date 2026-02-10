@@ -163,6 +163,7 @@ nav {
   color: var(--text-primary);
   font-size: 1.5rem;
   cursor: pointer;
+  padding: 0;
 }
 
 /* ============================================
@@ -484,11 +485,21 @@ nav {
    SLIDESHOW STYLES
    ============================================ */
 
-.slideshow-section {
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg);
+  max-width: 100%;
+}
+
+.slideshow-section {
+  margin-bottom: 0;
+  padding: var(--spacing-md);
   background-color: var(--bg-secondary);
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .slideshow-section h2 {
@@ -497,12 +508,14 @@ nav {
 
 .slideshow-container {
   position: relative;
-  max-width: 800px;
-  margin: var(--spacing-lg) auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   background-color: var(--bg-primary);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
 }
 
 .slideshow-wrapper {
@@ -546,8 +559,8 @@ nav {
   background-color: rgba(255, 255, 255, 0.8);
   border: none;
   color: var(--text-primary);
-  font-size: 1.5rem;
-  padding: var(--spacing-sm);
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease;
@@ -597,9 +610,10 @@ nav {
 /* PIN Lock Styles */
 .pin-lock-container {
   position: relative;
-  max-width: 800px;
-  margin: var(--spacing-lg) auto;
-  height: 500px;
+  width: 100%;
+  max-width: 100%;
+  margin: var(--spacing-md) auto;
+  height: 350px;
   background-color: var(--bg-primary);
   border-radius: 8px;
   overflow: hidden;
@@ -839,6 +853,11 @@ footer a {
     padding: var(--spacing-md);
   }
 
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
   .story-quote {
     font-size: 1rem;
     margin: var(--spacing-md) 0;
@@ -876,20 +895,44 @@ footer a {
   }
 
   nav {
+    position: sticky;
+    top: 0;
     padding: var(--spacing-sm);
     gap: var(--spacing-sm);
+    flex-wrap: nowrap;
+  }
+
+  .nav-toggle {
+    display: block;
   }
 
   .nav-brand {
     font-size: 1.1rem;
+    flex: 1;
   }
 
   .nav-links {
-    gap: var(--spacing-md);
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: var(--spacing-md);
+    width: 100%;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 
   .nav-links a {
     font-size: 0.85rem;
+    padding: var(--spacing-sm) 0;
   }
 
   .page {
@@ -911,6 +954,15 @@ footer a {
   .home-buttons .btn {
     padding: var(--spacing-md) var(--spacing-sm);
     font-size: 0.95rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .slideshow-section {
+    padding: var(--spacing-sm);
   }
 
   .story-section {
@@ -953,19 +1005,45 @@ footer a {
     border: none;
   }
 
-  .story-quote {
-    font-size: 0.9rem;
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .slideshow-section {
+    padding: var(--spacing-sm);
+    margin-bottom: 0;
+  }
+
+  .slideshow-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
   }
 
   .slideshow-container {
-    max-width: 90%;
+    margin: 0 auto;
   }
 
   .slideshow-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.2rem;
   }
 
-  .slideshow-label {
-    font-size: 1.5rem;
+  .slideshow-dots {
+    padding: var(--spacing-sm);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dot.active {
+    transform: scale(1.1);
+  }
+
+  .story-quote {
+    font-size: 0.9rem;
   }
 }

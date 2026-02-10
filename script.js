@@ -204,14 +204,13 @@ function setupMobileMenu() {
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
-      navLinks.style.display = 
-        navLinks.style.display === 'flex' ? 'none' : 'flex';
+      navLinks.classList.toggle('active');
     });
 
     // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        navLinks.style.display = 'none';
+        navLinks.classList.remove('active');
       });
     });
   }

@@ -242,7 +242,7 @@ nav {
 
 .page-content {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   padding: var(--spacing-lg) var(--spacing-lg);
   background-color: var(--bg-primary);
   border: 1px solid var(--border);
@@ -495,7 +495,7 @@ nav {
 
 .slideshow-section {
   margin-bottom: 0;
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   background-color: var(--bg-secondary);
   border-radius: 8px;
   display: flex;
@@ -1041,6 +1041,33 @@ footer a {
 
   .dot.active {
     transform: scale(1.1);
+  }
+
+  .pin-lock-container {
+    height: 300px;
+  }
+
+  .pin-lock-content p {
+    font-size: 0.85rem;
+    margin: var(--spacing-sm) 0;
+  }
+
+  .pin-lock-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .pin-input-field {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    width: 85%;
+    letter-spacing: 1px;
+  }
+
+  .pin-submit-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
   }
 
   .story-quote {

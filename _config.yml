@@ -1,7 +1,0 @@
-plugins:
-  - jekyll-redirect-from
-permalink: /:basename/
-
-# Ignore these files
-exclude:
-  - README.md

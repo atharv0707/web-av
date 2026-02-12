@@ -254,7 +254,11 @@ const slideshows = {
     images: [
       'img/cute-photos/IMG_2846.JPG',
       'img/cute-photos/IMG_2848.JPG',
-      'img/cute-photos/IMG_2957.JPG'
+      'img/cute-photos/IMG_2957.JPG',
+      'img/cute-photos/IMG_1778.JPG',
+      'img/cute-photos/IMG_2958.JPG',
+      'img/cute-photos/IMG_3136.JPG',
+      'img/cute-photos/IMG_3137.JPG'
     ],
     currentIndex: 0,
     autoRotate: true,
@@ -444,12 +448,35 @@ window.addEventListener('beforeunload', () => {
 // IMAGE MODAL FUNCTIONALITY
 // ============================================
 
+// Track which slideshows were paused when modal opened
+let pausedSlideshows = [];
+
 function openImageModal(imageSrc) {
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-image');
   
   if (modal && modalImg) {
-    modalImg.src = imageSrc;
+    // Find which slideshow this image belongs to
+    let currentImageToShow = imageSrc;
+    for (const [slideshowId, slideshow] of Object.entries(slideshows)) {
+      if (slideshow.images.includes(imageSrc)) {
+        // Show the current image of this slideshow, not the one that was clicked
+        currentImageToShow = slideshow.images[slideshow.currentIndex];
+        break;
+      }
+    }
+    
+    // Pause all auto-rotating slideshows
+    pausedSlideshows = [];
+    for (const [slideshowId, slideshow] of Object.entries(slideshows)) {
+      if (slideshow.autoRotateInterval) {
+        clearInterval(slideshow.autoRotateInterval);
+        slideshow.autoRotateInterval = null;
+        pausedSlideshows.push(slideshowId);
+      }
+    }
+    
+    modalImg.src = currentImageToShow;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -460,6 +487,17 @@ function closeImageModal() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
+    
+    // Resume only the slideshows that were paused when modal opened
+    pausedSlideshows.forEach(slideshowId => {
+      const slideshow = slideshows[slideshowId];
+      if (slideshow && slideshow.autoRotate) {
+        slideshow.autoRotateInterval = setInterval(() => {
+          changeSlide(slideshowId, 1);
+        }, 4000);
+      }
+    });
+    pausedSlideshows = [];
   }
 }
 

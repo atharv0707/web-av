@@ -368,12 +368,9 @@ const slideshows = {
     ],
     currentIndex: 0,
     autoRotate: true,
-    autoRotateInterval: null,
-    locked: true
+    autoRotateInterval: null
   }
 };
-
-const CORRECT_PIN = '29082025';
 
 // Change slide function
 function changeSlide(slideshowId, direction) {
@@ -466,57 +463,11 @@ function initSlideshows() {
     changeSlide('cute', 1);
   }, 4000);
   
-  // Initialize mugs slideshow (will start after PIN unlock)
+  // Initialize mugs slideshow
   updateSlideshow('mugs');
-}
-
-// PIN validation function
-function validatePin() {
-  const pinInput = document.getElementById('pin-input');
-  const messageDiv = document.getElementById('pin-message');
-  const pin = pinInput.value.trim();
-
-  if (pin === CORRECT_PIN) {
-    // Correct PIN
-    slideshows.mugs.locked = false;
-    
-    // Hide PIN lock container
-    const lockContainer = document.getElementById('pin-lock-container');
-    if (lockContainer) {
-      lockContainer.style.display = 'none';
-    }
-
-    // Show slideshow
-    const mugsSlideshow = document.getElementById('mugs-slideshow');
-    if (mugsSlideshow) {
-      mugsSlideshow.style.display = 'block';
-    }
-
-    // Start auto-rotation for mugs
-    if (slideshows.mugs.autoRotateInterval) {
-      clearInterval(slideshows.mugs.autoRotateInterval);
-    }
-    slideshows.mugs.autoRotateInterval = setInterval(() => {
-      changeSlide('mugs', 1);
-    }, 4000);
-
-    // Show success message
-    messageDiv.textContent = '✓ Unlocked!';
-    messageDiv.className = 'success';
-    
-    setTimeout(() => {
-      messageDiv.textContent = '';
-    }, 2000);
-
-    // Clear input
-    pinInput.value = '';
-  } else {
-    // Incorrect PIN
-    messageDiv.textContent = '✗ Incorrect PIN. Try again!';
-    messageDiv.className = 'error';
-    pinInput.value = '';
-    pinInput.focus();
-  }
+  slideshows.mugs.autoRotateInterval = setInterval(() => {
+    changeSlide('mugs', 1);
+  }, 4000);
 }
 
 // Initialize slideshows on images page

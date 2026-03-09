@@ -99,31 +99,12 @@
         </section>
         </div>
 
-        <!-- RANDOM MUGS SLIDESHOW (PIN PROTECTED) -->
+        <!-- RANDOM MUGS SLIDESHOW -->
         <section class="slideshow-section">
           <h2>Special Collection</h2>
           
-          <!-- PIN Lock Section -->
-          <div class="pin-lock-container" id="pin-lock-container">
-            <div class="pin-lock-overlay">
-              <div class="pin-lock-content">
-                <p>🔒 This collection is locked</p>
-                <p class="pin-lock-subtitle">Enter the secret PIN to unlock</p>
-                <input 
-                  type="password" 
-                  id="pin-input" 
-                  class="pin-input-field" 
-                  placeholder="Enter PIN"
-                  onkeypress="if(event.key==='Enter')validatePin()"
-                >
-                <button class="pin-submit-btn" onclick="validatePin()">Unlock</button>
-                <div id="pin-message"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Unlocked Slideshow (Hidden by default) -->
-          <div class="slideshow-container" id="mugs-slideshow" style="display: none;">
+          <!-- Slideshow -->
+          <div class="slideshow-container" id="mugs-slideshow">
             <div class="slideshow-wrapper" onclick="openImageModal('img/random-mugs/IMG_1728.JPG')">
               <img src="img/random-mugs/IMG_1728.JPG" alt="Random mug 1" class="slideshow-image">
             </div>

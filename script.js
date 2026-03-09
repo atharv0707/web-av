@@ -1,4 +1,99 @@
 // ============================================
+// GLOBAL PIN AUTHENTICATION GATE (Session-Based)
+// ============================================
+
+const AUTH_CONFIG = {
+  CORRECT_PIN: '29082025',
+  STORAGE_KEY: 'site_authenticated'
+};
+
+// Check if user is authenticated (session-based)
+function isAuthenticated() {
+  return sessionStorage.getItem(AUTH_CONFIG.STORAGE_KEY) === 'true';
+}
+
+// Validate PIN and authenticate user
+function validateGlobalPin() {
+  const pinInput = document.getElementById('global-pin-input');
+  const messageDiv = document.getElementById('global-pin-message');
+  const pin = pinInput.value.trim();
+
+  if (pin === AUTH_CONFIG.CORRECT_PIN) {
+    // Correct PIN - authenticate and show content (session-based)
+    sessionStorage.setItem(AUTH_CONFIG.STORAGE_KEY, 'true');
+    
+    // Show success message briefly
+    messageDiv.textContent = '✓ Access granted!';
+    messageDiv.className = 'success';
+    
+    setTimeout(() => {
+      showPageContent();
+    }, 500);
+    
+    pinInput.value = '';
+  } else {
+    // Incorrect PIN
+    messageDiv.textContent = '✗ Incorrect PIN. Please try again.';
+    messageDiv.className = 'error';
+    pinInput.value = '';
+    pinInput.focus();
+  }
+}
+
+// Show the actual page content (after authentication)
+function showPageContent() {
+  const gate = document.getElementById('auth-gate');
+  const content = document.getElementById('page-content');
+  
+  if (gate) gate.style.display = 'none';
+  if (content) {
+    content.style.display = 'block';
+    content.style.animation = 'fadeIn 0.6s ease-out forwards';
+  }
+}
+
+// Initialize global authentication gate
+function initAuthGate() {
+  const gate = document.getElementById('auth-gate');
+  const content = document.getElementById('page-content');
+  
+  if (!gate) return;
+  
+  if (isAuthenticated()) {
+    // User is authenticated, show content immediately
+    showPageContent();
+  } else {
+    // User is not authenticated, show PIN gate
+    if (content) content.style.display = 'none';
+    gate.style.display = 'flex';
+    
+    // Focus PIN input
+    const pinInput = document.getElementById('global-pin-input');
+    if (pinInput) {
+      pinInput.focus();
+    }
+  }
+}
+
+// Handle Enter key on PIN input
+function setupGlobalPinHandler() {
+  const pinInput = document.getElementById('global-pin-input');
+  if (pinInput) {
+    pinInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        validateGlobalPin();
+      }
+    });
+  }
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  initAuthGate();
+  setupGlobalPinHandler();
+});
+
+// ============================================
 // VALENTINE'S DAY WEBSITE - NAVIGATION & LOGIC
 // ============================================
 
